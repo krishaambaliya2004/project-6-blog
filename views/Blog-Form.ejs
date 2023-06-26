@@ -1,0 +1,58 @@
+<h1 style="text-align: center;text-decoration: underline;">BLOG</h1>
+
+<form method="post" action="/insertData" enctype="multipart/form-data">
+    <input type="hidden" value="<%= single.id %>" name="editid">
+    <table border="1" style="margin: auto;">
+        <tr>
+            <th>Blog Title :</th>
+            <td><input type="text" name="name" value="<%= single.name %>"></td>
+        </tr>
+        <tr>
+            <th>Discription :</th>
+            <td><input type="text" name="discription" value="<%= single.discription %>"></td>
+        </tr>
+        <tr>
+            <th>Image Upload</th>
+            <td>
+                <input type="file" name="image">
+                <% if(single){ %>
+                    <img src="<%= single.image %>" >
+                <% } %>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>
+                <% if(single) { %>
+                    <input type="submit" value="Edit">
+                <% } else{ %>
+                    <input type="submit">
+                <% } %>
+            </th>
+        </tr>
+    </table>  
+    <table border="1" style="margin: auto;">
+        <tr>
+            <th>Title</th>
+            <th>Discription</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+
+        <% blogdata.map((val)=>{ 
+            const {id,name,discription,image} = val
+            %>
+            <tr>
+                <td><%= name %></td>
+                <td><%= discription %></td>
+                <td>
+                    <img src="<%= image %>">
+                </td>
+                <td>
+                    <a href="/deletedata?id=<%= id %>">Delete</a> ||
+                    <a href="/editdata?id=<%= id %>">Edit</a>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</form>
